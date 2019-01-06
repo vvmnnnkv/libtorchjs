@@ -1,0 +1,53 @@
+{
+  "name": "libtorchjs",
+  "version": "0.0.1",
+  "description": "Node.js N-API wrapper for Libtorch",
+  "main": "lib/index.js",
+  "author": "Vova Manannikov <vova@promail.spb.ru>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vvmnnnkv/libtorchjs"
+  },
+  "engines": {
+    "node": "^6.14.2 || ^8 || ^9.11 || >=10"
+  },
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "keywords": [
+    "libtorch",
+    "pytorch",
+    "tensor",
+    "ScriptModule",
+    "neural-network",
+    "deep-learning",
+    "n-api",
+    "pre-built"
+  ],
+  "scripts": {
+    "install": "node-pre-gyp install --fallback-to-build=false",
+    "pre-build": "node-pre-gyp rebuild",
+    "pre-publish": "node-pre-gyp package publish",
+    "pre-unpublish": "node-pre-gyp unpublish",
+    "cmake-rebuild": "ncmake rebuild"
+  },
+  "dependencies": {
+    "node-pre-gyp": "^0.12.0",
+    "bindings": "^1.3.1"
+  },
+  "devDependencies": {
+    "node-addon-api": "^1.6.2",
+    "node-cmake": "^2.5.1",
+    "aws-sdk": "2.x"
+  },
+  "binary": {
+    "module_name": "libtorchjs",
+    "module_path": "./lib/binding/napi-v{napi_build_version}",
+    "remote_path": "./{module_name}/v{version}/{configuration}/",
+    "package_name": "{platform}-{arch}-napi-v{napi_build_version}.tar.gz",
+    "host": "https://libtorchjs.s3.amazonaws.com/",
+    "napi_versions": [
+      3
+    ]
+  }
+}

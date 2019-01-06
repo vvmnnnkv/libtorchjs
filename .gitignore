@@ -1,0 +1,7 @@
+build*
+cmake-build*
+libtorch
+*.tgz
+node_modules
+lib/binding
+.idea

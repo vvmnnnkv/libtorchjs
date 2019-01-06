@@ -1,0 +1,7 @@
+*
+!README.md
+!LICENCE
+!package.json
+!package-lock.json
+!yarn.lock
+!lib/*.js
