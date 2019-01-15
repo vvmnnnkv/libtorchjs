@@ -21,7 +21,7 @@ install:
   - IF /I "%PLATFORM%" == "x64" CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd" -arch=x64
   - IF /I "%PLATFORM%" == "x86" CALL "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd" -arch=x86
   - npm install --ignore-scripts
-  - npm pre-build
+  - npm run pre-build
 
 build: off
 test: off
