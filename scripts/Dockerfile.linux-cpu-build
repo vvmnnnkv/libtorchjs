@@ -1,0 +1,23 @@
+FROM fedora:latest
+
+WORKDIR /libtorchjs
+
+# install build tools
+RUN yum install -y cmake make gcc-c++ unzip
+
+# install nodejs
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - && \
+	yum install -y nodejs
+
+# download libtorch
+ADD https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip .
+RUN unzip libtorch-shared-with-deps-latest.zip
+
+# install packages first
+ADD package*.json ./
+RUN npm i --no-scripts
+
+# add rest of the files and build
+ADD . .
+RUN npm run pre-build
+RUN npm test
