@@ -11,8 +11,10 @@ This module was made just for fun, to check if it's easily possible to create [i
 
 With npm: `npm i --save libtorchjs`
 
-Module binary is pre-built using `node-pre-gyp` so it's not required to install build tools. 
-Currently, only Linux build is available.
+Module binary is pre-built and published using `node-pre-gyp` so it's not required to download libtorch/pytorch 
+or install build tools.
+
+Currently, Linux & Windows builds are available.
 
 ## Usage Example
 
@@ -57,5 +59,5 @@ Following resources were extremely useful for creating this module:
  * Expose more of libtorch
  * Promisify libtorchjs API
  * GPU support
- * Windows, Mac support
+ * ~~Windows~~ :heavy_check_mark:, Mac support
  * Use travis/appveyor for automatic builds

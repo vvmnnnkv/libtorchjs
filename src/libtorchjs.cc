@@ -2,6 +2,7 @@
 #include "jit.h"
 #include "script_module.h"
 #include "tensor.h"
+#include "utils.h"
 #include <stdlib.h>
 
 namespace libtorchjs {
@@ -9,14 +10,8 @@ namespace libtorchjs {
     Napi::Object ones(const Napi::CallbackInfo &info) {
         // array of dims
         Napi::Array shape = info[0].As<Napi::Array>();
-        // convert to vec
-        std::vector<long> vshape;
-        uint32_t len = shape.Length();
-        for (uint32_t i = 0; i < len; i++) {
-            vshape.push_back(shape.Get(i).ToNumber());
-        }
         // torch.ones
-        at::Tensor tensor = torch::ones(vshape, torch::requires_grad(false));
+        at::Tensor tensor = torch::ones(napiArrayToVector(shape), torch::requires_grad(false));
         // make napi tensor
         auto napiTensor = Tensor::NewInstance();
         Napi::ObjectWrap<Tensor>::Unwrap(napiTensor)->setTensor(tensor);
@@ -26,14 +21,8 @@ namespace libtorchjs {
     Napi::Object randn(const Napi::CallbackInfo &info) {
         // array of dims
         Napi::Array shape = info[0].As<Napi::Array>();
-        // convert to vec
-        std::vector<long> vshape;
-        uint32_t len = shape.Length();
-        for (uint32_t i = 0; i < len; i++) {
-            vshape.push_back(shape.Get(i).ToNumber());
-        }
         // torch.randn
-        at::Tensor tensor = torch::randn(vshape, torch::requires_grad(false));
+        at::Tensor tensor = torch::randn(napiArrayToVector(shape), torch::requires_grad(false));
         // make napi tensor
         auto napiTensor = Tensor::NewInstance();
         Napi::ObjectWrap<Tensor>::Unwrap(napiTensor)->setTensor(tensor);
