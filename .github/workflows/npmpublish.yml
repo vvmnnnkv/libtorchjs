@@ -17,7 +17,7 @@ jobs:
       - run: sudo apt-get install -y cmake build-essential unzip curl
       - run: curl -o libtorch.zip https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.4.0%2Bcpu.zip
       - run: unzip libtorch.zip
-      - run: npm i --no-scripts
+      - run: npm i --ignore-scripts
       - run: npm run pre-build
       - run: npm test
       - run: npm run pre-unpublish
