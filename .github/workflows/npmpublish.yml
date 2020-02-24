@@ -24,6 +24,6 @@ jobs:
         env:
           node_pre_gyp_accessKeyId: ${{secrets.node_pre_gyp_accessKeyId}} 
           node_pre_gyp_secretAccessKey: ${{secrets.node_pre_gyp_secretAccessKey}}
-      - run: npm run publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
