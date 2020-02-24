@@ -1,0 +1,27 @@
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+          registry-url: https://registry.npmjs.org/
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y cmake build-essential unzip curl
+      - run: curl -o libtorch.zip https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.4.0%2Bcpu.zip
+      - run: unzip libtorch.zip
+      - run: npm i --no-scripts
+      - run: npm run pre-build
+      - run: npm test
+      - run: npm run pre-unpublish
+      - run: npm run pre-publish
+      - run: npm run publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
