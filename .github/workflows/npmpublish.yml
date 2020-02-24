@@ -20,8 +20,10 @@ jobs:
       - run: npm i --ignore-scripts
       - run: npm run pre-build
       - run: npm test
-      - run: npm run pre-unpublish
-      - run: npm run pre-publish
-      - run: npm run publish
+      - run: npm run pre-unpublish && npm run pre-publish
+        env:
+          node_pre_gyp_accessKeyId: ${{secrets.node_pre_gyp_accessKeyId}} 
+          node_pre_gyp_secretAccessKey: ${{secrets.node_pre_gyp_secretAccessKey}}
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
