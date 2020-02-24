@@ -12,7 +12,7 @@ namespace libtorchjs {
 
         explicit ScriptModule(const Napi::CallbackInfo &info);
 
-        void setModule(std::shared_ptr<torch::jit::script::Module> module);
+        void setModule(torch::jit::script::Module module);
 
         static Napi::Object NewInstance();
 
@@ -21,7 +21,7 @@ namespace libtorchjs {
 
         void forward(const Napi::CallbackInfo &info);
 
-        std::shared_ptr<torch::jit::script::Module> module;
+        torch::jit::script::Module module;
     };
 
 }

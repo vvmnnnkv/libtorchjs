@@ -1,6 +1,6 @@
 {
   "name": "libtorchjs",
-  "version": "0.0.3",
+  "version": "1.0.0-alpha.3",
   "description": "Node.js N-API wrapper for Libtorch",
   "main": "lib/index.js",
   "author": "Vova Manannikov <vova@promail.spb.ru>",
@@ -38,7 +38,7 @@
     "test": "mocha tests"
   },
   "dependencies": {
-    "node-pre-gyp": "^0.12.0",
+    "node-pre-gyp": "^0.14.0",
     "bindings": "^1.3.1"
   },
   "devDependencies": {

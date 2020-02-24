@@ -39,10 +39,15 @@
           "files": [ ],
           "conditions": [
             [ "OS=='linux'",
-                { "files+": ["libtorch/lib/libtorch.so", "libtorch/lib/libtorch.so.1", "libtorch/lib/libc10.so",
-                       "libtorch/lib/libcaffe2.so", "libtorch/lib/libmkldnn.so.0",
-                       "libtorch/lib/libmkldnn.so.0.14.0", "libtorch/lib/libonnxifi_dummy.so",
-                       "libtorch/lib/libgomp-7bcb08ae.so.1"]
+                { "files+": [
+                    "libtorch/lib/libc10.so",
+                    "libtorch/lib/libcaffe2_detectron_ops.so",
+                    "libtorch/lib/libcaffe2_module_test_dynamic.so",
+                    "libtorch/lib/libfbjni.so",
+                    "libtorch/lib/libgomp-753e6e92.so.1",
+                    "libtorch/lib/libpytorch_jni.so",
+                    "libtorch/lib/libtorch.so"
+                  ]
                 }
             ],
             [ "OS=='win'",

@@ -9,7 +9,7 @@ namespace libtorchjs {
 
     class ScriptModuleForwardAsyncWorker : public Napi::AsyncWorker {
     public:
-        static void forward(std::shared_ptr<torch::jit::script::Module> module,
+        static void forward(torch::jit::script::Module module,
                 torch::Tensor tensor, Napi::Function cb) {
             auto *worker = new ScriptModuleForwardAsyncWorker(module, tensor, cb);
             worker->Queue();
@@ -18,7 +18,7 @@ namespace libtorchjs {
     protected:
         void Execute() override {
             // torch.forward
-            outTensor = module->forward({inTensor}).toTensor();
+            outTensor = module.forward({inTensor}).toTensor();
         }
 
         void OnOK() override {
@@ -30,11 +30,11 @@ namespace libtorchjs {
         }
 
     private:
-        ScriptModuleForwardAsyncWorker(std::shared_ptr<torch::jit::script::Module> module,
+        ScriptModuleForwardAsyncWorker(torch::jit::script::Module module,
                                        torch::Tensor tensor, Napi::Function cb)
                 : Napi::AsyncWorker(cb), inTensor(tensor), module(module) {}
 
-        std::shared_ptr<torch::jit::script::Module> module;
+        torch::jit::script::Module module;
         torch::Tensor inTensor;
         torch::Tensor outTensor;
     };
@@ -77,7 +77,7 @@ namespace libtorchjs {
         ScriptModuleForwardAsyncWorker::forward(this->module, torchTensor, cb);
     }
 
-    void ScriptModule::setModule(std::shared_ptr<torch::jit::script::Module> module) {
+    void ScriptModule::setModule(torch::jit::script::Module module) {
         this->module = module;
     }
 

@@ -38,7 +38,7 @@ namespace libtorchjs {
         LoadWorker(Napi::Function cb, std::string &filename)
                 : Napi::AsyncWorker(cb), filename(filename) {}
 
-        std::shared_ptr<torch::jit::script::Module> module;
+        torch::jit::script::Module module;
         std::string filename;
     };
 
