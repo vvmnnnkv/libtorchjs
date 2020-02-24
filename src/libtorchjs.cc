@@ -34,7 +34,8 @@ namespace libtorchjs {
         Napi::Float32Array arr = info[0].As<Napi::Float32Array>();
         size_t elements = arr.ElementLength();
         // make torch tensor
-        at::Tensor tensor = torch::tensor(at::ArrayRef<float>(arr.Data(), elements), torch::requires_grad(false));
+        torch::TensorOptions options;
+        at::Tensor tensor = torch::tensor(at::ArrayRef<float>(arr.Data(), elements), options);
         // napi tensor
         auto napiTensor = Tensor::NewInstance();
         Napi::ObjectWrap<Tensor>::Unwrap(napiTensor)->setTensor(tensor);

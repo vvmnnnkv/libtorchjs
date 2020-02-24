@@ -56,7 +56,7 @@ namespace libtorchjs {
         uint64_t size = this->tensor.numel();
         // make unit8 type tensor
         auto byteTensor = this->tensor.clamp(0, 255).to(at::ScalarType::Byte);
-        auto byteData = byteTensor.contiguous().data<uint8_t>();
+        auto byteData = byteTensor.contiguous().data_ptr<uint8_t>();
         // wrap in napi unit8 array
         auto arr = Napi::Uint8Array::New(env, size);
         for (uint64_t i = 0; i < size; i++) {
