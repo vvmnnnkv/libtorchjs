@@ -16,6 +16,7 @@ IF (UNIX)
 ENDIF(UNIX)
 
 if(WIN32)
+  include(CheckCXXCompilerFlag)
   check_cxx_compiler_flag(/d2FH4- HAS_D2FH4)
   if (HAS_D2FH4)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /d2FH4-")
