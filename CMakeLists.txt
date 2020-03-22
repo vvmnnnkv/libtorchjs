@@ -15,6 +15,13 @@ IF (UNIX)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,$ORIGIN")
 ENDIF(UNIX)
 
+if(WIN32)
+  check_cxx_compiler_flag(/d2FH4- HAS_D2FH4)
+  if (HAS_D2FH4)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /d2FH4-")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /d2FH4-")
+  endif()
+ENDIF(WIN32)
 
 # Include N-API wrappers
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api")
