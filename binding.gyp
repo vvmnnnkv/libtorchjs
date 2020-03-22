@@ -51,14 +51,13 @@
                 }
             ],
             [ "OS=='win'",
-                { "files+": ["libtorch/lib/c10.dll",
-                       "libtorch/lib/caffe2.dll",
-                       "libtorch/lib/libiompstubs5md.dll",
-                       "libtorch/lib/caffe2_module_test_dynamic.dll",
-                       "libtorch/lib/libiomp5md.dll",
-                       "libtorch/lib/onnxifi_dummy.dll",
-                       "libtorch/lib/onnxifi.dll",
-                       "libtorch/lib/torch.dll"]
+                { "files+": [
+                    "libtorch/c10.dll",
+                    "libtorch/caffe2_module_test_dynamic.dll",
+                    "libtorch/libiomp5md.dll",
+                    "libtorch/libiompstubs5md.dll",
+                    "libtorch/torch.dll"
+                  ]
                 }
             ]
           ],

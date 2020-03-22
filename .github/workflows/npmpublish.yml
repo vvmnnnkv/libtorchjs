@@ -5,14 +5,13 @@ on:
     types: [created]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-          registry-url: https://registry.npmjs.org/
       - run: sudo apt-get update
       - run: sudo apt-get install -y cmake build-essential unzip curl
       - run: curl -o libtorch.zip https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.4.0%2Bcpu.zip
@@ -24,6 +23,39 @@ jobs:
         env:
           node_pre_gyp_accessKeyId: ${{secrets.node_pre_gyp_accessKeyId}} 
           node_pre_gyp_secretAccessKey: ${{secrets.node_pre_gyp_secretAccessKey}}
+
+  build-win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '2.7'
+      - uses: microsoft/setup-msbuild@v1.0.0
+        with:
+          vs-version: '15.0'
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+      - run: Invoke-WebRequest -Uri https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.4.0.zip -OutFile libtorch.zip
+      - run: Expand-Archive libtorch.zip -DestinationPath . -Force
+      - run: npm i --ignore-scripts
+      - run: npm run pre-build
+      - run: npm test
+      - run: npm run pre-unpublish && npm run pre-publish
+        env:
+          node_pre_gyp_accessKeyId: ${{secrets.node_pre_gyp_accessKeyId}} 
+          node_pre_gyp_secretAccessKey: ${{secrets.node_pre_gyp_secretAccessKey}}
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+          registry-url: https://registry.npmjs.org/
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
